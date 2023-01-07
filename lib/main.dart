@@ -49,34 +49,58 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
-  TabController? controller;
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+
+  late TabController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = TabController(length: 3, vsync: this);
+    controller.addListener(() {
+      if(!controller.indexIsChanging){
+        print("이전 index, ${controller.previousIndex}");
+        print("현재 index, ${controller.index}");
+        print("전체 탭 길이, ${controller.length}");
+      }
+    });
+  }
 
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('TabBar Example'),
-      ),
-      body: TabBarView(
-        children: <Widget> [FirstApp(), SecondApp(), SecondApp()],
-        controller: controller,
-      ),
-      bottomNavigationBar: TabBar(tabs: <Tab>[
-        Tab(icon: Icon(Icons.looks_one,color: Colors.blue,),),
-        Tab(icon: Icon(Icons.looks_two,color: Colors.blue,),),
-        Tab(icon: Icon(Icons.looks_two,color: Colors.blue,),),
-      ], controller: controller,
-      )
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TabController(length: 3, vsync: this);
+        appBar: AppBar(
+          title: Text('TabBar Example'),
+        ),
+        body: TabBarView(
+          children: <Widget>[FirstApp(), SecondApp(), SecondApp()],
+          controller: controller,
+        ),
+        bottomNavigationBar: TabBar(
+          tabs: <Tab>[
+            Tab(
+              icon: Icon(
+                Icons.looks_one,
+                color: Colors.blue,
+              ),
+            ),
+            Tab(
+              icon: Icon(
+                Icons.looks_two,
+                color: Colors.blue,
+              ),
+            ),
+            Tab(
+              icon: Icon(
+                Icons.looks_two,
+                color: Colors.blue,
+              ),
+            ),
+          ],
+          controller: controller,
+        ));
   }
 
   @override
@@ -84,5 +108,4 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     controller!.dispose();
     super.dispose();
   }
-
 }
