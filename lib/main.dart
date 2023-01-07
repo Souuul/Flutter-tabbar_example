@@ -61,11 +61,12 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         title: Text('TabBar Example'),
       ),
       body: TabBarView(
-        children: <Widget> [FirstApp(), SecondApp()],
+        children: <Widget> [FirstApp(), SecondApp(), SecondApp()],
         controller: controller,
       ),
       bottomNavigationBar: TabBar(tabs: <Tab>[
         Tab(icon: Icon(Icons.looks_one,color: Colors.blue,),),
+        Tab(icon: Icon(Icons.looks_two,color: Colors.blue,),),
         Tab(icon: Icon(Icons.looks_two,color: Colors.blue,),),
       ], controller: controller,
       )
@@ -75,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 2, vsync: this);
+    controller = TabController(length: 3, vsync: this);
   }
 
   @override
